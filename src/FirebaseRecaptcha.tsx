@@ -1,8 +1,18 @@
-import { DEFAULT_WEB_APP_OPTIONS, FirebaseOptions } from 'expo-firebase-core';
-import { CodedError } from 'expo-modules-core';
-import * as React from 'react';
+import Constants from "expo-constants";
+import { CodedError } from "expo-modules-core";
+import * as React from "react";
+import { FirebaseOptions } from "./FirebaseRecaptcha.types";
+import { WebView } from "./WebView";
 
-import { WebView } from './WebView';
+function getDefaultWebOptions(): FirebaseOptions | void {
+  return Constants.expoConfig?.web?.config?.firebase;
+}
+
+/**
+ * The default Firebase options as defined in `web.config.firebase` in `app.json`.
+ */
+const DEFAULT_WEB_APP_OPTIONS: FirebaseOptions | void = getDefaultWebOptions();
+
 
 interface Props extends React.ComponentProps<typeof WebView> {
   firebaseConfig?: FirebaseOptions;

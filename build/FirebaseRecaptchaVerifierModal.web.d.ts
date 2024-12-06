@@ -7,6 +7,6 @@ interface Props {
     languageCode?: string;
     innerRef: React.MutableRefObject<FirebaseAuthApplicationVerifier | null>;
 }
-declare const _default: React.ForwardRefExoticComponent<Omit<Props, "innerRef"> & React.RefAttributes<unknown>>;
+declare const _default: React.ForwardRefExoticComponent<Props & React.RefAttributes<unknown>>;
 export default _default;
 //# sourceMappingURL=FirebaseRecaptchaVerifierModal.web.d.ts.map

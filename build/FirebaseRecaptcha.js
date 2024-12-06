@@ -1,7 +1,14 @@
-import { DEFAULT_WEB_APP_OPTIONS } from 'expo-firebase-core';
-import { CodedError } from 'expo-modules-core';
-import * as React from 'react';
-import { WebView } from './WebView';
+import Constants from "expo-constants";
+import { CodedError } from "expo-modules-core";
+import * as React from "react";
+import { WebView } from "./WebView";
+function getDefaultWebOptions() {
+    return Constants.expoConfig?.web?.config?.firebase;
+}
+/**
+ * The default Firebase options as defined in `web.config.firebase` in `app.json`.
+ */
+const DEFAULT_WEB_APP_OPTIONS = getDefaultWebOptions();
 function getWebviewSource(firebaseConfig, firebaseVersion, appVerificationDisabledForTesting = false, languageCode, invisible) {
     firebaseVersion = firebaseVersion || '8.0.0';
     return {
@@ -127,7 +134,7 @@ export default function FirebaseRecaptcha(props) {
         console.error(`FirebaseRecaptcha: Missing firebase web configuration. Please set the "expo.web.config.firebase" field in "app.json" or use the "firebaseConfig" prop.`);
         return null;
     }
-    return (React.createElement(WebView, { ref: webview, javaScriptEnabled: true, automaticallyAdjustContentInsets: true, scalesPageToFit: true, mixedContentMode: "always", source: getWebviewSource(firebaseConfig, firebaseVersion, appVerificationDisabledForTesting, languageCode, invisible), onError: onError, onMessage: (event) => {
+    return (<WebView ref={webview} javaScriptEnabled automaticallyAdjustContentInsets scalesPageToFit mixedContentMode="always" source={getWebviewSource(firebaseConfig, firebaseVersion, appVerificationDisabledForTesting, languageCode, invisible)} onError={onError} onMessage={(event) => {
             const data = JSON.parse(event.nativeEvent.data);
             switch (data.type) {
                 case 'load':
@@ -150,7 +157,7 @@ export default function FirebaseRecaptcha(props) {
                     }
                     break;
             }
-        }, ...otherProps }));
+        }} {...otherProps}/>);
 }
 FirebaseRecaptcha.defaultProps = {
     firebaseConfig: DEFAULT_WEB_APP_OPTIONS,

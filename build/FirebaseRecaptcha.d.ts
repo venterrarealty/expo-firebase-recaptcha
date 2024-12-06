@@ -1,6 +1,6 @@
-import { FirebaseOptions } from 'expo-firebase-core';
-import * as React from 'react';
-import { WebView } from './WebView';
+import * as React from "react";
+import { FirebaseOptions } from "./FirebaseRecaptcha.types";
+import { WebView } from "./WebView";
 interface Props extends React.ComponentProps<typeof WebView> {
     firebaseConfig?: FirebaseOptions;
     firebaseVersion?: string;
@@ -13,7 +13,7 @@ interface Props extends React.ComponentProps<typeof WebView> {
     invisible?: boolean;
     verify?: boolean;
 }
-declare function FirebaseRecaptcha(props: Props): JSX.Element | null;
+declare function FirebaseRecaptcha(props: Props): React.JSX.Element | null;
 declare namespace FirebaseRecaptcha {
     var defaultProps: {
         firebaseConfig: void | FirebaseOptions;
