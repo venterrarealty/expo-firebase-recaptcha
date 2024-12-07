@@ -35,7 +35,7 @@ export default class FirebaseRecaptchaVerifierModal extends React.Component<Prop
     private onVerify;
     cancel: () => void;
     onDismiss: () => void;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};
 //# sourceMappingURL=FirebaseRecaptchaVerifierModal.d.ts.map

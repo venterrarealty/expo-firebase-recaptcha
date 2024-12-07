@@ -108,18 +108,25 @@ export default class FirebaseRecaptchaVerifierModal extends React.Component {
     render() {
         const { title, cancelLabel, attemptInvisibleVerification, ...otherProps } = this.props;
         const { visible, visibleLoaded, invisibleLoaded, invisibleVerify, invisibleKey } = this.state;
-        return (React.createElement(View, { style: styles.container },
-            attemptInvisibleVerification && (React.createElement(FirebaseRecaptcha, { ...otherProps, key: `invisible${invisibleKey}`, style: styles.invisible, onLoad: this.onInvisibleLoad, onError: this.onError, onVerify: this.onVerify, onFullChallenge: this.onFullChallenge, invisible: true, verify: invisibleLoaded && invisibleVerify })),
-            React.createElement(Modal, { visible: visible, animationType: "slide", presentationStyle: "pageSheet", onRequestClose: this.cancel, onDismiss: this.onDismiss },
-                React.createElement(SafeAreaView, { style: styles.modalContainer },
-                    React.createElement(View, { style: styles.header },
-                        React.createElement(Text, { style: styles.title }, title),
-                        React.createElement(View, { style: styles.cancel },
-                            React.createElement(Button, { title: cancelLabel || FirebaseRecaptchaVerifierModal.defaultProps.cancelLabel, onPress: this.cancel }))),
-                    React.createElement(View, { style: styles.content },
-                        React.createElement(FirebaseRecaptcha, { ...otherProps, style: styles.content, onLoad: this.onVisibleLoad, onError: this.onError, onVerify: this.onVerify }),
-                        !visibleLoaded ? (React.createElement(View, { style: styles.loader },
-                            React.createElement(ActivityIndicator, { size: "large" }))) : undefined)))));
+        return (<View style={styles.container}>
+        {attemptInvisibleVerification && (<FirebaseRecaptcha {...otherProps} key={`invisible${invisibleKey}`} style={styles.invisible} onLoad={this.onInvisibleLoad} onError={this.onError} onVerify={this.onVerify} onFullChallenge={this.onFullChallenge} invisible verify={invisibleLoaded && invisibleVerify}/>)}
+        <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={this.cancel} onDismiss={this.onDismiss}>
+          <SafeAreaView style={styles.modalContainer}>
+            <View style={styles.header}>
+              <Text style={styles.title}>{title}</Text>
+              <View style={styles.cancel}>
+                <Button title={cancelLabel || FirebaseRecaptchaVerifierModal.defaultProps.cancelLabel} onPress={this.cancel}/>
+              </View>
+            </View>
+            <View style={styles.content}>
+              <FirebaseRecaptcha {...otherProps} style={styles.content} onLoad={this.onVisibleLoad} onError={this.onError} onVerify={this.onVerify}/>
+              {!visibleLoaded ? (<View style={styles.loader}>
+                  <ActivityIndicator size="large"/>
+                </View>) : undefined}
+            </View>
+          </SafeAreaView>
+        </Modal>
+      </View>);
     }
 }
 const styles = StyleSheet.create({

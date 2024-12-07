@@ -36,9 +36,6 @@
     "@testing-library/react": "10.4.3",
     "expo-module-scripts": "^3.0.0"
   },
-  "dependencies": {
-    "expo-firebase-core": "~6.0.0"
-  },
   "peerDependencies": {
     "react-native-webview": "*"
   },

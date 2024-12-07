@@ -38,10 +38,10 @@ class FirebaseRecaptchaVerifierModal extends React.Component {
     }
     render() {
         const { attemptInvisibleVerification, appVerificationDisabledForTesting, languageCode } = this.props;
-        return (React.createElement("div", { style: styles.container, key: `${attemptInvisibleVerification ? 'invisible' : 'visible'}-${appVerificationDisabledForTesting ? 'testing' : 'regular'}-${languageCode ?? ''}`, id: "recaptcha-container", ref: this.setRef, dangerouslySetInnerHTML: { __html: '' } }));
+        return (<div style={styles.container} key={`${attemptInvisibleVerification ? 'invisible' : 'visible'}-${appVerificationDisabledForTesting ? 'testing' : 'regular'}-${languageCode ?? ''}`} id="recaptcha-container" ref={this.setRef} dangerouslySetInnerHTML={{ __html: '' }}/>);
     }
 }
-export default React.forwardRef((props, ref) => (React.createElement(FirebaseRecaptchaVerifierModal, { ...props, innerRef: ref })));
+export default React.forwardRef((props, ref) => (<FirebaseRecaptchaVerifierModal {...props} innerRef={ref}/>));
 const styles = {
     // Ensure the reCAPTCHA badge is in front or other elements
     container: { zIndex: 1000 },
